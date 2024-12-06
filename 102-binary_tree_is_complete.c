@@ -34,8 +34,10 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 		}
 		else
 		{
-			/* If we find a non-NULL node after a NULL node,
-			the tree is not complete */
+			/**
+			* If we find a non-NULL node after a NULL node,
+			* the tree is not complete
+			*/
 			if (found_null)
 			return (0);
 
