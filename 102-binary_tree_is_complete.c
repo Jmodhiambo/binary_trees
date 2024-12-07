@@ -11,13 +11,12 @@
  */
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
-	if (tree == NULL)
-		return (0);
-
-	/* Initialize a queue to perform level-order traversal */
 	binary_tree_t *queue[1024];
 	int front = 0, rear = 0;
 	bool found_null = false;
+
+	if (tree == NULL)
+		return (0);
 
 	/* Start with the root node */
 	queue[rear++] = (binary_tree_t *)tree;
