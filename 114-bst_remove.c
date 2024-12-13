@@ -25,7 +25,7 @@ bst_t *find_min(bst_t *root)
  */
 bst_t *bst_remove(bst_t *root, int value)
 {
-	bst_t *node, *successor;
+	bst_t *successor;
 
 	if (!root)
 		return (NULL);
@@ -38,17 +38,15 @@ bst_t *bst_remove(bst_t *root, int value)
 	else
 	{
 		/* Node with one or no children */
-		if (!root->left)
+		if (!root->left || !root->right)
 		{
-			node = root->right; /* Save the right child */
-			free(root); /* Free the current node */
-			return (node); /* Return the right child */
-		}
-		else if (!root->right)
-		{
-			node = root->left; /* Save the left child */
-			free(root); /* Free the current node */
-			return (node); /* Return the left child */
+			bst_t *temp = root->left ? root->left : root->right;
+
+			if (temp) /* If there is a child */
+				temp->parent = root->parent;
+
+			free(root);
+			return (temp);
 		}
 
 		/* Node with two children: find the in-order successor */
